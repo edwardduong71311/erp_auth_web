@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+"use client";
 
-export const metadata: Metadata = {
-  title: "ERP App",
-  description: "Ptssss, wanna buy some milk?",
-};
+import { UserContext } from "@/state/UserContext";
+import "@/style/globals.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RootLayout({
   children,
@@ -13,7 +12,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <title>ERP App</title>
+      </head>
+      <body>
+        <UserContext>{children}</UserContext>
+        <ToastContainer />
+      </body>
     </html>
   );
 }
