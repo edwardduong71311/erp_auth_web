@@ -41,6 +41,6 @@ export const login = async ({
         status: false,
         data: null,
       });
-    }, 2000);
+    }, 1500);
   });
 };
