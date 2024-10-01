@@ -1,13 +1,15 @@
-import { login, LoginParam } from "@/repository/user";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { login, LoginParam } from "@/repository/UserRepo";
+import { createContext, ReactNode, useContext, useMemo, useState } from "react";
 
 type UserContextType = {
   name?: string;
   isLogging?: boolean;
+  isAuthenticated: boolean;
   doLogin: (param: LoginParam) => Promise<boolean>;
 };
 const UserContextData = createContext<UserContextType>({
   doLogin: () => Promise.resolve(false),
+  isAuthenticated: false,
 });
 
 export function useUserContext() {
@@ -18,6 +20,7 @@ type Props = {
   children: ReactNode;
 };
 export function UserContext(props: Props) {
+  const [token, setToken] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [isLogging, setIsLogging] = useState<boolean>(false);
 
@@ -25,15 +28,19 @@ export function UserContext(props: Props) {
     setIsLogging(true);
     const data = await login(param);
     setName(data.data?.user.name || "");
+    setToken(data.data?.token || null);
     setIsLogging(false);
     return data.status;
   };
+
+  const isAuthenticated = useMemo(() => !!token, [token]);
 
   return (
     <UserContextData.Provider
       value={{
         isLogging,
         name,
+        isAuthenticated,
         doLogin,
       }}
     >
