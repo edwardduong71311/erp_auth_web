@@ -8,10 +8,14 @@ type Props = {
 };
 
 export default function Button(props: Props) {
-  const style =
-    "inline-flex items-center justify-center transition-all duration-500 rounded-md bg-base-700 hover:bg-hover focus:bg-focus text-white";
+  const alignment = "inline-flex items-center justify-center";
+  const border = "rounded-md";
+  const background = "bg-blue-950 hover:bg-blue-800 focus:bg-blue-800";
   return (
-    <button className={`${style} ${props.className}`} onClick={props.onClick}>
+    <button
+      className={`transition-all duration-300 text-white ${alignment} ${border} ${background} ${props.className}`}
+      onClick={props.onClick}
+    >
       {props.spinning ? <Spinner className="mr-2" /> : <></>}
       {props.text || "Button"}
     </button>
