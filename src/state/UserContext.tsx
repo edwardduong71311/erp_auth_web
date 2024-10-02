@@ -6,10 +6,14 @@ type UserContextType = {
   isLogging?: boolean;
   isAuthenticated: boolean;
   doLogin: (param: LoginParam) => Promise<boolean>;
+  doLogout: () => void;
+  getBreadcrumb: () => string;
 };
 const UserContextData = createContext<UserContextType>({
-  doLogin: () => Promise.resolve(false),
   isAuthenticated: false,
+  doLogin: () => Promise.resolve(false),
+  doLogout: () => {},
+  getBreadcrumb: () => "",
 });
 
 export function useUserContext() {
@@ -33,6 +37,15 @@ export function UserContext(props: Props) {
     return data.status;
   };
 
+  const doLogout = () => {
+    setName("");
+    setToken(null);
+  };
+
+  const getBreadcrumb = () => {
+    return "Page > Page 1 > Bla bla";
+  };
+
   const isAuthenticated = useMemo(() => !!token, [token]);
 
   return (
@@ -42,6 +55,8 @@ export function UserContext(props: Props) {
         name,
         isAuthenticated,
         doLogin,
+        doLogout,
+        getBreadcrumb,
       }}
     >
       {props.children}

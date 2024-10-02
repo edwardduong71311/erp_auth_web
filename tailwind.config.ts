@@ -16,10 +16,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        base: "#130f40",
-        "base-700": "#30336b",
-      },
+      colors: {},
     },
   },
 };

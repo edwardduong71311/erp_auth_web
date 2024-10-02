@@ -21,7 +21,7 @@ export default function Login() {
     });
 
     if (isOk) {
-      router.push("/dashboard");
+      router.push("/main");
     } else {
       toast.error("Login failed. Please provided information", {
         position: "top-right",

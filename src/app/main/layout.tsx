@@ -25,9 +25,9 @@ export default function MainLayout({
 
   return (
     <>
-      <LeftMenu className="w-[50px] hover:w-[250px] bg-base-700" />
+      <LeftMenu className="w-[50px] hover:w-[250px] bg-blue-950" />
       <div className="flex ml-[50px] flex-col h-screen">
-        <Header className="flex-none h-[50px] px-5 bg-base-700 text-white" />
+        <Header className="flex-none h-[50px] px-5 bg-blue-950 text-white" />
         <div className="flex-1 overflow-y-auto p-5 text-base">{children}</div>
       </div>
     </>
