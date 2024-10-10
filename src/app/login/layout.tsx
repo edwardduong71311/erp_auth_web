@@ -1,7 +1,7 @@
 "use client";
 
+import { useRouterContext } from "@/state/RouterContext";
 import { useUserContext } from "@/state/UserContext";
-import { redirect } from "next/navigation";
 import { useLayoutEffect } from "react";
 
 export default function LoginLayout({
@@ -10,10 +10,11 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   const { isAuthenticated } = useUserContext();
+  const { moveToMain } = useRouterContext();
 
   useLayoutEffect(() => {
     if (isAuthenticated) {
-      redirect("/main");
+      moveToMain();
     }
   }, [isAuthenticated]);
 

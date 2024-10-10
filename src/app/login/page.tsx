@@ -2,14 +2,14 @@
 
 import Button from "@/components/Button";
 import TextInput from "@/components/TextInput";
+import { useRouterContext } from "@/state/RouterContext";
 import { useUserContext } from "@/state/UserContext";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
 export default function Login() {
-  const router = useRouter();
   const { isLogging, doLogin } = useUserContext();
+  const { moveToMain } = useRouterContext();
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +21,7 @@ export default function Login() {
     });
 
     if (isOk) {
-      router.push("/main");
+      moveToMain();
     } else {
       toast.error("Login failed. Please provided information", {
         position: "top-right",
