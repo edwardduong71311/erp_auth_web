@@ -1,10 +1,10 @@
 "use client";
 
 import { useUserContext } from "@/state/UserContext";
-import { redirect } from "next/navigation";
 import { useLayoutEffect } from "react";
 import Header from "../common/Header";
 import LeftMenu from "../common/LeftMenu";
+import { useRouterContext } from "@/state/RouterContext";
 
 export default function MainLayout({
   children,
@@ -12,10 +12,11 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const { isAuthenticated } = useUserContext();
+  const { moveToLogin } = useRouterContext();
 
   useLayoutEffect(() => {
     if (!isAuthenticated) {
-      redirect("/login");
+      moveToLogin();
     }
   }, [isAuthenticated]);
 

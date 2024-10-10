@@ -1,5 +1,7 @@
 "use client";
 
+import { RouterContext } from "@/state/RouterContext";
+import { ServerContext } from "@/state/ServerContext";
 import { UserContext } from "@/state/UserContext";
 import "@/style/globals.css";
 import { ToastContainer } from "react-toastify";
@@ -16,7 +18,11 @@ export default function RootLayout({
         <title>ERP App</title>
       </head>
       <body>
-        <UserContext>{children}</UserContext>
+        <RouterContext>
+          <ServerContext>
+            <UserContext>{children}</UserContext>
+          </ServerContext>
+        </RouterContext>
         <ToastContainer />
       </body>
     </html>
